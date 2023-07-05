@@ -24,5 +24,6 @@ export async function addTask(req, res) {
         title, uid, done: false, 
         createdAt: FieldValue.serverTimestamp()
     }
-    return await coll.add(newTask);
+    await coll.add(newTask);
+    res.status(201).send({ success: true, message: 'Item Added'});
 }
