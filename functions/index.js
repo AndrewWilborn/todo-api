@@ -1,7 +1,7 @@
 import {onRequest} from "firebase-functions/v2/https";
 import express from "express";
 import cors from "cors";
-import { getTasks , addTask, updateTask} from "./tasks.js";
+import { getTasks , addTask, updateTask, deleteTask} from "./tasks.js";
 
 
 const app = express();
@@ -13,5 +13,6 @@ app.use(express.json());
 app.get('/tasks/:uid', getTasks);
 app.post('/tasks', addTask);
 app.patch('/tasks', updateTask);
+app.delete('/tasks', deleteTask)
 
 export const api = onRequest(app);

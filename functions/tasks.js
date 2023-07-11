@@ -46,3 +46,17 @@ export async function updateTask(req, res){
 
     res.status(201).send({ success: true, message: "Updated Item"})
 }
+
+// Delete Tasks
+export async function deleteTask(req, res){
+    const { id } = req.body;
+
+    if(!id){
+        res.status(401).send({ success: false, message: "Id Not Found"})
+        return;
+    }
+
+    await coll.doc(id).delete();
+
+    res.status(201).send({success: true, message: "Deleted Item"});
+}
