@@ -32,7 +32,7 @@ export async function addTask(req, res) {
 export async function updateTask(req, res){
     const { done, id } = req.body;
 
-    if(!uid) {
+    if(!id) {
         res.status(401).send({success: false, message: "Not a valid reqest"});
         return;
     }
