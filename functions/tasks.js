@@ -11,7 +11,7 @@ export async function getTasks(req, res) {
     // maps tasks into an array
     const taskArary = tasks.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     res.send(taskArary);
-}
+};
 
 export async function addTask(req, res) {
     const {title, uid} = req.body;
@@ -23,7 +23,26 @@ export async function addTask(req, res) {
     const newTask = {
         title, uid, done: false, 
         createdAt: FieldValue.serverTimestamp()
-    }
+    };
     await coll.add(newTask);
     res.status(201).send({ success: true, message: 'Item Added'});
+}
+
+// Update Tasks
+export async function updateTask(req, res){
+    const { done, id } = req.body;
+
+    if(!uid) {
+        res.status(401).send({success: false, message: "Not a valid reqest"});
+        return;
+    }
+
+    const updates = {
+        done,
+        updatedAt: FieldValue.serverTimestamp()
+    }
+
+    await coll.doc(uid).update(updates);
+
+    res.status(201).send({ success: true, message: "Updated Item"})
 }
