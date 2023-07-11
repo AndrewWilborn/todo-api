@@ -42,7 +42,7 @@ export async function updateTask(req, res){
         updatedAt: FieldValue.serverTimestamp()
     }
 
-    await coll.doc(uid).update(updates);
+    await coll.doc(id).update(updates);
 
     res.status(201).send({ success: true, message: "Updated Item"})
 }
